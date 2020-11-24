@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Hello World!
-tagline: Supporting tagline
+title: Driedger's Home School
+tagline: A good place to learn
 ---
 {% include JB/setup %}
 
