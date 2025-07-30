@@ -1,1 +1,13 @@
-.pyc
+# Jekyll build output
+_site/
+.jekyll-cache/
+.jekyll-metadata
+
+# Sass/Temp files
+.sass-cache/
+*.tmp
+*.log
+
+# Bundler/Vendor
+.bundle/
+vendor/bundle/
