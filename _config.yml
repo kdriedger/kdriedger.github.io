@@ -9,10 +9,6 @@ description: "Very quick version controlled static website"
 baseurl: "" # Set if deploying to a subpath
 url: "http://www.extremedesigners.ca"
 
-# THEME
-theme: minimal-mistakes-jekyll
-minimal_mistakes_skin: "default"
-
 # PLUGINS
 plugins:
   - jekyll-seo-tag
