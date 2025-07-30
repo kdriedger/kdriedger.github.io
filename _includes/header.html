@@ -1,0 +1,70 @@
+<header class="py-3 pb-5">
+	<div class="container text-center">
+		<h1 id="typewriter" class="display-2 m-0 text-center"></h1>
+	</div>
+</header>
+
+<script>
+	window.onload = () => {
+		const target = document.getElementById("typewriter");
+		const correctText = "{{ site.title }}";
+		const mistakeText = "{{ site.mistake_title }}";
+		const charsToDelete = {{ site.backspace_amount }};
+		const speedMin = {{ site.type_speed.fast }};
+		const speedMax = {{ site.type_speed.slow }};
+		const dSpeedMin = {{ site.backspace_speed.fast }};
+		const dSpeedMax = {{ site.backspace_speed.slow }};
+
+		function variableSpeed(min, max) {
+			return Math.floor(Math.random() * (max - min + 1)) + min;
+		}
+
+		function typeText(el, text, onComplete) {
+			let i = 0;
+			function typeChar() {
+				if (i < text.length) {
+					el.textContent += text.charAt(i++);
+					setTimeout(typeChar, variableSpeed(speedMin, speedMax));
+				}
+				else {
+					onComplete?.();
+				}
+			}
+			typeChar();
+		}
+
+		function backspace(el, count, onComplete) {
+			let i = 0;
+			function deleteChar() {
+				if (i < count) {
+					el.textContent = el.textContent.slice(0, -1);
+					i++;
+					setTimeout(deleteChar, variableSpeed(dSpeedMin, dSpeedMax));
+				}
+				else {
+					onComplete?.();
+				}
+			}
+			deleteChar();
+		}
+
+		typeText(target, mistakeText, () => {
+			target.classList.add("stopped");
+			setTimeout(() => {
+				target.classList.remove("stopped");
+				backspace(target, charsToDelete, () => {
+					setTimeout(() => {
+						typeText(target, correctText.slice(mistakeText.length - charsToDelete), () => {
+							target.classList.add("stopped");
+							setTimeout(() => {
+								target.classList.add("done");
+							}, 1000);
+						});
+					}, 100);
+				});
+			}, {{ site.title_fix_delay }});
+		});
+	};
+
+	
+</script>
