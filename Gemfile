@@ -3,10 +3,6 @@ source "https://rubygems.org"
 
 gem "jekyll"
 
-# theme gem
-# (see https://github.com/mmistakes/minimal-mistakes for more info)
-gem "minimal-mistakes-jekyll"
-
 # plugins
 gem "jekyll-seo-tag"
 gem "jekyll-sitemap"
