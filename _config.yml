@@ -27,3 +27,20 @@ highlighter: rouge
 exclude:
   - "README.md"
   - ".gitignore"
+
+# CUSTOM VARIABLES
+
+# Font for header
+headerfont_url: "https://fonts.googleapis.com/css2?family=Bitcount+Grid+Single:wght@400&display=swap"
+headerfont_family: "'Bitcount Grid Single', sans-serif"
+
+# Typing header text effect
+mistake_title: extremeprogramming
+title_fix_delay: 1000
+type_speed: # (speed in ms)
+  slow: 100 
+  fast: 60 
+backspace_speed: # (speed in ms)
+  slow: 70 
+  fast: 50 
+backspace_amount: 11 # (amount of characters to delete)
