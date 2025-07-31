@@ -1,7 +1,6 @@
 ---
 layout: default 
 title: Driedger's Home School
-tagline: A good place to learn
 ---
 
 Welcome to the Driedger's Home School
