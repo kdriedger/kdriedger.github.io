@@ -1,140 +1,52 @@
 <header class="py-3 pb-5">
 	<a href="">
-		<div id="type-target" class="container text-center">
-			<h1 id="typewriter" class="display-2 m-0 text-center">&nbsp;</h1>
+		<div id="home-button" class="container text-center">
+			<h1 id="title" class="typewriter display-2 m-0 text-center"></h1>
 		</div>
 	</a>
 </header>
-
+<script src="/assets/js/typewriter.js"></script>
+<script src="/assets/js/delay.js"></script>
 <script>
 	window.onload = () => {
-//		const target = document.getElementById("typewriter");
-		//const correctText = "{{ site.title }}";
-		//const mistakeText = "{{ site.mistake_title }}";
-		//const charsToDelete = {{ site.backspace_amount }};
-		//const speedMin = {{ site.type_speed.fast }};
-		//const speedMax = {{ site.type_speed.slow }};
-		//const dSpeedMin = {{ site.backspace_speed.fast }};
-		//const dSpeedMax = {{ site.backspace_speed.slow }};
+		const title = document.getElementById("title");
+		const homeButton = document.getElementById("home-button");
+		const titleWriter = createTypewriter(
+					title,
+					{{ site.type_speed.slow }},
+					{{ site.type_speed.fast }},
+					{{ site.delete_speed.slow }},
+					{{ site.delete_speed.fast }},
+					{{ site.intro_delete_delay }},
+					{{ site.cursor_flash_delay }});
 
-		function type(el, newText, typeSpeed = 100, backSpeed = 80) {
-		    let cancelled = false;
-		    let timeoutId = null;
 
-		    const oldText = el.textContent;
-		    let prefixLen = 0;
-		    while (
-			prefixLen < oldText.length &&
-			prefixLen < newText.length &&
-			oldText[prefixLen] === newText[prefixLen]
-		    ) {
-			prefixLen++;
-		    }
-
-		    let charsToDelete = oldText.length - prefixLen;
-		    const charsToType = newText.slice(prefixLen);
-		    let typeIndex = 0;
-
-		    function animate() {
-			// The essential guard to stop a cancelled animation from proceeding.
-			if (cancelled) {
-			    return;
-			}
-
-			// Phase 1: Deleting characters
-			if (charsToDelete > 0) {
-			    el.textContent = el.textContent.slice(0, -1);
-			    charsToDelete--;
-			    timeoutId = setTimeout(animate, backSpeed);
-			    return;
-			}
-
-			// Phase 2: Typing new characters
-			if (typeIndex < charsToType.length) {
-			    el.textContent += charsToType.charAt(typeIndex);
-			    typeIndex++;
-			    timeoutId = setTimeout(animate, typeSpeed);
-			    return;
-			}
-		    }
-
-		    // Start the animation.
-		    animate();
-
-		    return {
-			cancel() {
-			    // The complete two-part cancellation:
-			    // 1. Set the flag to prevent any future execution.
-			    cancelled = true;
-			    // 2. Clear the very next scheduled timeout to stop the loop immediately.
-			    clearTimeout(timeoutId);
-			}
-		    };
+		async function playIntro() {
+			await titleWriter.type("{{ site.mistake_title }}");
+			await delay(1000);
+			await titleWriter.type("{{ site.title }}");
 		}
 
+		let currentText = ""
+		let controller = null
 
 		function changeTextIfNeeded(newText) {
 			if (newText === currentText) return;
+			titleWriter.setDeleteDelay({{ site.delete_delay }});
 
 			currentText = newText;
-			generation++;
-			const thisGen = generation;
-
-			controller?.cancel();
-			controller = type(text, newText, 80, 60);
+			titleWriter?.cancel();
+			controller = titleWriter.type(newText);
 		}
 
-		const el = document.getElementById("type-target");
-		const text = document.getElementById("typewriter");
-		let controller = null;
-		let currentText = "e";
-		let generation = 0;
-
-		function waitForControllerDone(ctrl) {
-			return new Promise(resolve => {
-				const checkDone = () => {
-					if (ctrl === null || ctrl.cancelled) {
-						resolve();
-						return;
-					}
-					setTimeout(checkDone, 50);
-				};
-				checkDone();
-			});
-		}
-		
-		function delay(ms) {
-			return new Promise(resolve => setTimeout(resolve, ms));
-		}
-
-		async function playIntro() {
-			generation++;
-			const thisGen = generation;
-
-			controller?.cancel();
-			controller = type(text, "extremeprogramming", 80, 60);
-
-			await waitForControllerDone(controller);
-			if (thisGen !== generation) return;
-
-			await delay(700);
-			if (thisGen !== generation) return;
-
-			controller = type(text, "extremedesigners", 80, 60);
-			await waitForControllerDone(controller);
-		}
-
-		el.addEventListener("mouseenter", () => {
-			changeTextIfNeeded("home?");
+		homeButton.addEventListener("mouseenter", () => {
+			changeTextIfNeeded("{{ site.hover_title }}");
 		});
 
-		el.addEventListener("mouseleave", () => {
-			changeTextIfNeeded("extremedesigners");
+		homeButton.addEventListener("mouseleave", () => {
+			changeTextIfNeeded("{{ site.title }}");
 		});
 
-		changeTextIfNeeded("extremeprogramming");
-		setTimeout(() => {
-			changeTextIfNeeded("extremedesigners");
-		}, 2000);
+		playIntro();
 	};
 </script>
