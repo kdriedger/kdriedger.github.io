@@ -15,10 +15,11 @@ body[data-theme='dark'] {
 
 #typewriter {
   overflow: hidden;
-  white-space: no-wrap;
+  white-space: nowrap;
   display: inline-block;
   border-right: 2px solid currentColor;
   user-select: none;
+  min-height: 1.2em;
 }
 
 #typewriter.stopped {

@@ -1,70 +1,140 @@
 <header class="py-3 pb-5">
-	<div class="container text-center">
-		<h1 id="typewriter" class="display-2 m-0 text-center"></h1>
-	</div>
+	<a href="">
+		<div id="type-target" class="container text-center">
+			<h1 id="typewriter" class="display-2 m-0 text-center">&nbsp;</h1>
+		</div>
+	</a>
 </header>
 
 <script>
 	window.onload = () => {
-		const target = document.getElementById("typewriter");
-		const correctText = "{{ site.title }}";
-		const mistakeText = "{{ site.mistake_title }}";
-		const charsToDelete = {{ site.backspace_amount }};
-		const speedMin = {{ site.type_speed.fast }};
-		const speedMax = {{ site.type_speed.slow }};
-		const dSpeedMin = {{ site.backspace_speed.fast }};
-		const dSpeedMax = {{ site.backspace_speed.slow }};
+//		const target = document.getElementById("typewriter");
+		//const correctText = "{{ site.title }}";
+		//const mistakeText = "{{ site.mistake_title }}";
+		//const charsToDelete = {{ site.backspace_amount }};
+		//const speedMin = {{ site.type_speed.fast }};
+		//const speedMax = {{ site.type_speed.slow }};
+		//const dSpeedMin = {{ site.backspace_speed.fast }};
+		//const dSpeedMax = {{ site.backspace_speed.slow }};
 
-		function variableSpeed(min, max) {
-			return Math.floor(Math.random() * (max - min + 1)) + min;
-		}
+		function type(el, newText, typeSpeed = 100, backSpeed = 80) {
+		    let cancelled = false;
+		    let timeoutId = null;
 
-		function typeText(el, text, onComplete) {
-			let i = 0;
-			function typeChar() {
-				if (i < text.length) {
-					el.textContent += text.charAt(i++);
-					setTimeout(typeChar, variableSpeed(speedMin, speedMax));
-				}
-				else {
-					onComplete?.();
-				}
+		    const oldText = el.textContent;
+		    let prefixLen = 0;
+		    while (
+			prefixLen < oldText.length &&
+			prefixLen < newText.length &&
+			oldText[prefixLen] === newText[prefixLen]
+		    ) {
+			prefixLen++;
+		    }
+
+		    let charsToDelete = oldText.length - prefixLen;
+		    const charsToType = newText.slice(prefixLen);
+		    let typeIndex = 0;
+
+		    function animate() {
+			// The essential guard to stop a cancelled animation from proceeding.
+			if (cancelled) {
+			    return;
 			}
-			typeChar();
-		}
 
-		function backspace(el, count, onComplete) {
-			let i = 0;
-			function deleteChar() {
-				if (i < count) {
-					el.textContent = el.textContent.slice(0, -1);
-					i++;
-					setTimeout(deleteChar, variableSpeed(dSpeedMin, dSpeedMax));
-				}
-				else {
-					onComplete?.();
-				}
+			// Phase 1: Deleting characters
+			if (charsToDelete > 0) {
+			    el.textContent = el.textContent.slice(0, -1);
+			    charsToDelete--;
+			    timeoutId = setTimeout(animate, backSpeed);
+			    return;
 			}
-			deleteChar();
+
+			// Phase 2: Typing new characters
+			if (typeIndex < charsToType.length) {
+			    el.textContent += charsToType.charAt(typeIndex);
+			    typeIndex++;
+			    timeoutId = setTimeout(animate, typeSpeed);
+			    return;
+			}
+		    }
+
+		    // Start the animation.
+		    animate();
+
+		    return {
+			cancel() {
+			    // The complete two-part cancellation:
+			    // 1. Set the flag to prevent any future execution.
+			    cancelled = true;
+			    // 2. Clear the very next scheduled timeout to stop the loop immediately.
+			    clearTimeout(timeoutId);
+			}
+		    };
 		}
 
-		typeText(target, mistakeText, () => {
-			target.classList.add("stopped");
-			setTimeout(() => {
-				target.classList.remove("stopped");
-				backspace(target, charsToDelete, () => {
-					setTimeout(() => {
-						typeText(target, correctText.slice(mistakeText.length - charsToDelete), () => {
-							target.classList.add("stopped");
-							setTimeout(() => {
-								target.classList.add("done");
-							}, 1000);
-						});
-					}, 100);
-				});
-			}, {{ site.title_fix_delay }});
+
+		function changeTextIfNeeded(newText) {
+			if (newText === currentText) return;
+
+			currentText = newText;
+			generation++;
+			const thisGen = generation;
+
+			controller?.cancel();
+			controller = type(text, newText, 80, 60);
+		}
+
+		const el = document.getElementById("type-target");
+		const text = document.getElementById("typewriter");
+		let controller = null;
+		let currentText = "e";
+		let generation = 0;
+
+		function waitForControllerDone(ctrl) {
+			return new Promise(resolve => {
+				const checkDone = () => {
+					if (ctrl === null || ctrl.cancelled) {
+						resolve();
+						return;
+					}
+					setTimeout(checkDone, 50);
+				};
+				checkDone();
+			});
+		}
+		
+		function delay(ms) {
+			return new Promise(resolve => setTimeout(resolve, ms));
+		}
+
+		async function playIntro() {
+			generation++;
+			const thisGen = generation;
+
+			controller?.cancel();
+			controller = type(text, "extremeprogramming", 80, 60);
+
+			await waitForControllerDone(controller);
+			if (thisGen !== generation) return;
+
+			await delay(700);
+			if (thisGen !== generation) return;
+
+			controller = type(text, "extremedesigners", 80, 60);
+			await waitForControllerDone(controller);
+		}
+
+		el.addEventListener("mouseenter", () => {
+			changeTextIfNeeded("home?");
 		});
-	};
 
-	
+		el.addEventListener("mouseleave", () => {
+			changeTextIfNeeded("extremedesigners");
+		});
+
+		changeTextIfNeeded("extremeprogramming");
+		setTimeout(() => {
+			changeTextIfNeeded("extremedesigners");
+		}, 2000);
+	};
 </script>
