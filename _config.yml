@@ -34,13 +34,21 @@ exclude:
 headerfont_url: "https://fonts.googleapis.com/css2?family=Bitcount+Grid+Single:wght@400&display=swap"
 headerfont_family: "'Bitcount Grid Single', sans-serif"
 
+# Font for text
+textfont_url: "https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap"
+textfont_family: "'Anonymous Pro', sans-serif"
+
 # Typing header text effect
+hover_title: home?
 mistake_title: extremeprogramming
 title_fix_delay: 1000
 type_speed: # (speed in ms)
   slow: 100 
-  fast: 60 
-backspace_speed: # (speed in ms)
-  slow: 70 
   fast: 50 
-backspace_amount: 11 # (amount of characters to delete)
+delete_speed: # (speed in ms)
+  slow: 70
+  fast: 40
+intro_delete_delay: 250 # (speed in ms)
+delete_delay: 110
+cursor_flash_delay: 1500
+
