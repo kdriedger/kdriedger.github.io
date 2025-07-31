@@ -1,6 +1,7 @@
 ---
 layout: default 
-title: Driedger's Home School
+title: "Driedger's Home School"
+permalink: /home/
 ---
 
 Welcome to the Driedger's Home School
