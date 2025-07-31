@@ -28,6 +28,10 @@ exclude:
   - "README.md"
   - ".gitignore"
 
+# INCLUDES
+include:
+  - web # (for flutter2048)
+
 # CUSTOM VARIABLES
 
 # Font for header
