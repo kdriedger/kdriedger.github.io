@@ -7,9 +7,9 @@ if (savedTheme) {
 }
 
 toggleButton.addEventListener("click", () => {
-	const current = body.getAttribute("data-theme") || "light";
+	const current = body.getAttribute("theme") || "light";
 	const next = current === "light" ? "dark" : "light";
-	body.setAttribute("data-theme", next);
+	body.setAttribute("theme", next);
 	localStorage.setItem("theme", next);
 });
 
