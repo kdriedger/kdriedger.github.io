@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: page
 title: "Flutter48"
 permalink: /flutter48/
 ---
