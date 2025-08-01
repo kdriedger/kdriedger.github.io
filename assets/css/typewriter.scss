@@ -1,0 +1,24 @@
+.typewriter {
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+  user-select: none;
+  min-height: 1.2em;
+  border-right: none;
+  box-sizing: border-box;
+}
+
+.typewriter.typing {
+  border-right: 2px solid currentColor;
+}
+
+.typewriter.flash {
+  border-right: 2px solid currentColor;
+  animation: blinkCursor 0.8s step-end infinite;
+}
+
+@keyframes blinkCursor {
+  0%, 100% { border-color: transparent };
+  50% { border-color: currentColor };
+}
+

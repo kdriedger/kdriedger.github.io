@@ -1,0 +1,23 @@
+:root {
+  /* Font families & sizes */
+  --font-header-family: "Bitcount Grid Single", sans-serif;
+  --font-body-family: "Anonymous Pro", sans-serif;
+  --font-header-size: 200%;
+  --font-body-size: 1.4em;
+}
+
+/* Light-theme colors */
+body[theme="light"] {
+  background: linear-gradient(0deg, rgba(219,217,255,1) 0%, rgba(247,246,255,1) 100%);
+  --color-header: #000000;
+  --color-link: #00D100;
+  --color-body: #000000;
+}
+
+/* Dark-theme colors */
+body[theme="dark"] {
+  background: linear-gradient(0deg, rgba(26,0,6,1) 0%, rgba(2,0,0,1) 100%);
+  --color-header: #FFFFFF;
+  --color-link: #00D100;
+  --color-body: #FFFFFF;
+}
