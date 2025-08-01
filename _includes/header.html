@@ -1,14 +1,23 @@
 <header class="py-3 pb-5">
+	<a href="/home/">
 		<div id="home-button" class="container text-center">
-			<h1 class="typewriter display-2 m-0 text-center">
-				<a id="title" href="/home/"></a>
-			</h1>
+			<h1 id="title" class="typewriter display-2 m-0 text-center"></h1>
 		</div>
+	</a>
 </header>
 <script src="/assets/js/typewriter.js"></script>
 <script src="/assets/js/delay.js"></script>
+<script src="/assets/js/homeAnimation.js"></script>
 <script>
 	window.onload = () => {
+		let defaultText = "{{ site.title }}";
+		let hoverText = "{{ site.title_hover }}";
+		{% if include.title %}
+			defaultText = "{{ include.title }}"
+		{% endif %}
+		{% if include.hoverTitle %}
+			hoverText = "{{ include.hoverTitle }}"
+		{% endif %}
 		const title = document.getElementById("title");
 		const homeButton = document.getElementById("home-button");
 		const titleWriter = createTypewriter(
@@ -20,12 +29,9 @@
 					{{ site.intro_delete_delay }},
 					{{ site.cursor_flash_delay }});
 
-
-		async function playIntro() {
-			await titleWriter.type("{{ site.mistake_title }}");
-			await delay(1000);
-			await titleWriter.type("{{ site.title }}");
-		}
+		{% if include.homepage %}
+			playHomeAnimation(titleWriter)
+		{% endif %}
 
 		let currentText = ""
 		let controller = null
@@ -40,13 +46,15 @@
 		}
 
 		homeButton.addEventListener("mouseenter", () => {
-			changeTextIfNeeded("{{ site.hover_title }}");
+			changeTextIfNeeded(hoverText);
 		});
 
 		homeButton.addEventListener("mouseleave", () => {
-			changeTextIfNeeded("{{ site.title }}");
+			changeTextIfNeeded(defaultText);
 		});
 
-		playIntro();
+		{% unless include.homepage %}
+			changeTextIfNeeded(defaultText);
+		{% endunless %}
 	};
 </script>
