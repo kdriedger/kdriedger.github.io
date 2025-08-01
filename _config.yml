@@ -34,13 +34,11 @@ include:
 
 # CUSTOM VARIABLES
 
-# Font for header
-headerfont_url: "https://fonts.googleapis.com/css2?family=Bitcount+Grid+Single:wght@400&display=swap"
-headerfont_family: "'Bitcount Grid Single', sans-serif"
-
-# Font for text
-textfont_url: "https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap"
-textfont_family: "'Anonymous Pro', sans-serif"
+fonts:
+  - name: header
+    url: "https://fonts.googleapis.com/css2?family=Bitcount+Grid+Single:wght@400&display=swap"
+  - name: body
+    url: "https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap"
 
 # Typing header text effect
 hover_title: home?
