@@ -1,1 +1,55 @@
-Sorry this page does not exist =(
+---
+layout: 404
+title: "404"
+---
+
+<div id="home-button" class="container text-center">
+	<a href="/home/">
+		<h1 id="404" class="typewriter display-2 m-0 text-center"></h1>
+	</a>
+</div>
+<script src="/assets/js/typewriter.js"></script>
+<script src="/assets/js/delay.js"></script>
+<script>
+	window.onload = () => {
+		const title = document.getElementById("404");
+		const homeButton = document.getElementById("home-button");
+		const titleWriter = createTypewriter(
+					title,
+					{{ site.type_speed.slow }},
+					{{ site.type_speed.fast }},
+					{{ site.delete_speed.slow }},
+					{{ site.delete_speed.fast }},
+					{{ site.intro_delete_delay }},
+					{{ site.cursor_flash_delay }});
+
+
+		async function playIntro() {
+			await titleWriter.type("{{ site.mistake_title }}");
+			await delay(1000);
+			await titleWriter.type("{{ site.title }}");
+		}
+
+		let currentText = ""
+		let controller = null
+
+		function changeTextIfNeeded(newText) {
+			if (newText === currentText) return;
+			titleWriter.setDeleteDelay({{ site.delete_delay }});
+
+			currentText = newText;
+			titleWriter?.cancel();
+			controller = titleWriter.type(newText);
+		}
+
+		homeButton.addEventListener("mouseenter", () => {
+			changeTextIfNeeded("{{ site.hover_title }}");
+		});
+
+		homeButton.addEventListener("mouseleave", () => {
+			changeTextIfNeeded("{{ site.title }}");
+		});
+
+		playIntro();
+	};
+</script>
