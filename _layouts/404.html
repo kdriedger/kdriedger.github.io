@@ -1,0 +1,16 @@
+---
+layout: baseplate
+---
+<style>
+	body {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100vh; /* Full viewport height */
+		margin: 0;     /* Remove default margin */
+	}
+</style>
+<main class="container-fluid" style="max-width:700px">
+	{{ content }}
+	{% include theme-button.html %}
+</main>

@@ -1,0 +1,32 @@
+---
+---
+@use "globals.scss";
+@use "typewriter.scss";
+@use "theme-button.scss";
+
+body {
+  font-family: var(--font-body-family);
+  font-size: var(--font-body-size);
+  color: var(--color-body);
+}
+
+h1 {
+  font-family: var(--font-header-family);
+  font-size: var(--font-header-size);
+  color: var(--color-header);
+}
+
+a {
+  color: var(--color-link);
+  text-decoration: none;
+}
+
+a h1 {
+  color: var(--color-link);
+  text-decoration: none;
+}
+
+button {
+  color: var(--color-body);
+}
+

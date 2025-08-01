@@ -1,0 +1,8 @@
+{% if site.fonts %}
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+	{% for font in site.fonts %}
+		<link rel="stylesheet" href="{{ font.url }}">
+	{% endfor %}
+{% endif %}
