@@ -1,5 +1,5 @@
 # SITE SETTINGS
-title: extremedesigners
+title: "extremedesigners"
 author:
   name: "Kevin Driedger"
   emails: 
@@ -41,8 +41,8 @@ fonts:
     url: "https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap"
 
 # Typing header text effect
-hover_title: home?
-mistake_title: extremeprogramming
+title_hover: "home?"
+title_mistake: "extremeprogramming"
 title_fix_delay: 1000
 type_speed: # (speed in ms)
   slow: 100 
