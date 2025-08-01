@@ -1,6 +1,7 @@
 ---
 layout: page 
-title: "Driedger's Home School"
+title: "home"
+header: "extremedesigners"
 permalink: /home/
 ---
 
