@@ -2,11 +2,13 @@
 layout: 404
 title: "404"
 ---
-
 <div id="home-button" class="container text-center">
-	<a href="/home/">
-		<h1 id="404" class="typewriter display-2 m-0 text-center"></h1>
-	</a>
+		<h1 class="typewriter display-1 m-0 text-center" style="font-size: 5rem;">
+			<a id="404" href="/home/"></a>
+		</h1>
+</div>
+<div class="container text-center">
+	<p>The page you are looking for does not exist.</p>
 </div>
 <script src="/assets/js/typewriter.js"></script>
 <script src="/assets/js/delay.js"></script>
@@ -25,9 +27,9 @@ title: "404"
 
 
 		async function playIntro() {
-			await titleWriter.type("{{ site.mistake_title }}");
+			await titleWriter.type("not found :(");
 			await delay(1000);
-			await titleWriter.type("{{ site.title }}");
+			await titleWriter.type("404");
 		}
 
 		let currentText = ""
@@ -43,11 +45,11 @@ title: "404"
 		}
 
 		homeButton.addEventListener("mouseenter", () => {
-			changeTextIfNeeded("{{ site.hover_title }}");
+			changeTextIfNeeded("home?");
 		});
 
 		homeButton.addEventListener("mouseleave", () => {
-			changeTextIfNeeded("{{ site.title }}");
+			changeTextIfNeeded("404");
 		});
 
 		playIntro();
