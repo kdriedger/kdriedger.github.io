@@ -4,9 +4,12 @@ title: "Flutter48"
 permalink: /flutter48/
 ---
 
-<iframe
-	src="{{ '/web/index.html' | relative_url }}"
-	width="100%"
-	style="border:none;"
-	title="Flutter48">
-</iframe>
+<div style="text-align:center;">
+    <iframe
+        src="{{ '/web/index.html' | relative_url }}"
+        width="400px"
+        height="400px"
+        style="border:none;min-width:400px;min-height:400px;"
+        title="Flutter48">
+    </iframe>
+</div>
