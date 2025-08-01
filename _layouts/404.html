@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"/>
+	<title>{{ page.title }} | {{ site.title }}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url}}">
+	{% if site.headerfont_url %}
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link rel="stylesheet" href="{{ site.headerfont_url }}">
+		<style>
+			h1 {
+				font-family: {{ site.headerfont_family }};
+			}
+		</style>
+	{% endif %}
+	{% if site.textfont_url %}
+		<link rel="stylesheet" href="{{ site.textfont_url }}">
+		<style>
+			body {
+				font-family: {{ site.textfont_family }};
+			}
+		</style>
+	{% endif %}
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+	<style>
+		body {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh; /* Full viewport height */
+			margin: 0;     /* Remove default margin */
+		}
+	</style>
+</head>
+<body data-theme="dark" class="container-fluid min-vh-100">
+	<main class="container-fluid squeezed-container">
+		{{ content }}
+	</main>
+</body>
+</html>
