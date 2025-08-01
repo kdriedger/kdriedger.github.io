@@ -1,5 +1,5 @@
 ---
-layout: default 
+layout: page 
 title: "Driedger's Home School"
 permalink: /home/
 ---
@@ -12,3 +12,4 @@ https://www.rvhea.org/
 contact me for more information about joining: linuxbox+driedgerhomeschool@gmail.com
 
 [Web 2048 Game](web)
+
