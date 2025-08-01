@@ -8,7 +8,7 @@
 
 /* Light-theme colors */
 body[theme="light"] {
-  background: linear-gradient(0deg, rgba(219,217,255,1) 0%, rgba(247,246,255,1) 100%);
+  background: linear-gradient(0deg,rgba(235, 230, 216, 1) 0%, rgba(242, 240, 235, 1) 100%);
   --color-header: #000000;
   --color-link: #00D100;
   --color-body: #000000;
@@ -16,7 +16,7 @@ body[theme="light"] {
 
 /* Dark-theme colors */
 body[theme="dark"] {
-  background: linear-gradient(0deg, rgba(26,0,6,1) 0%, rgba(2,0,0,1) 100%);
+  background: linear-gradient(0deg,rgba(16, 16, 16, 1) 100%, rgba(3, 3, 3, 1) 0%);
   --color-header: #FFFFFF;
   --color-link: #00D100;
   --color-body: #FFFFFF;
