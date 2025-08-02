@@ -13,6 +13,7 @@ url: "http://www.extremedesigners.ca"
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
+  - jekyll-redirect-from
 
 # BUILD
 destination: ./_site
