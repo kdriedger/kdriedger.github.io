@@ -1,7 +1,6 @@
 ---
 layout: page
 title: "flutter48"
-header: "flutter48"
 permalink: /flutter48/
 ---
 
