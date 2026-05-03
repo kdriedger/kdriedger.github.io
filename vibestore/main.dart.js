@@ -86018,7 +86018,7 @@ var $async$oG=A.N(function(a,b){if(a===1){o.push(b)
 s=p}for(;;)switch(s){case 0:m=0,i=t.f,h=t.j,g=t.z
 case 3:if(!(m<=2)){s=5
 break}p=7
-l=A.d2("https://raw.githubusercontent.com/kdriedger/vibe-store/main/apps/apps.json",0,null)
+l=A.d2("https://raw.githubusercontent.com/kdriedger/vibe-apps/main/apps.json",0,null)
 s=10
 return A.O(n.w0(l),$async$oG)
 case 10:k=b
