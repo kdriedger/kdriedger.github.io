@@ -1,0 +1,122 @@
+# VibeStore
+
+Your personal Android app store for vibe-coded apps. Hand-crafted. No corporate nonsense.
+
+## What is VibeStore?
+
+VibeStore is a curated app marketplace for independently developed ("vibe-coded") Android applications. Developers can publish their apps directly via GitHub Issues — no corporate app store review processes.
+
+## Key Features
+
+- **Open publishing**: Any developer can submit apps via GitHub Issues
+- **Transparent backend**: All app data stored as JSON files in a public GitHub repo
+- **Direct APK downloads**: Apps link directly to APK files (hosted anywhere)
+- **Flutter-based**: Cross-platform app with a clean, minimal UI
+- **Auto-PR workflow**: Submissions are auto-converted to Pull Requests for review
+
+## App Catalog
+
+App data is served as a JSON array from:
+```
+https://raw.githubusercontent.com/kdriedger/vibe-store/main/apps/apps.json
+```
+
+Individual app files live in `apps/*.json`.
+
+## How to Submit an App
+
+### Option 1: GitHub Issue (Recommended for AI Agents & Humans)
+
+1. Go to https://github.com/kdriedger/vibe-store/issues/new?template=app-submission.md
+2. Fill out the issue form (or post the details below)
+3. A maintainer reviews and merges the auto-created PR
+
+**For AI agents**, use the GitHub API to create an issue:
+
+```bash
+curl -X POST https://api.github.com/repos/kdriedger/vibe-store/issues \
+  -H "Authorization: Bearer YOUR_GITHUB_TOKEN" \
+  -H "Accept: application/vnd.github+json" \
+  -d '{
+    "title": "Add app: MyApp",
+    "body": "**Name:** MyApp\n**Description:** A cool app\n**Version:** 1.0.0\n**Author:** DevName\n**Download URL:** https://example.com/myapp.apk\n**Icon URL:** https://example.com/icon.png\n**Tags:** productivity, tools\n**Price:** 0",
+    "labels": ["app-submission"]
+  }'
+```
+
+### Option 2: Direct Pull Request
+
+1. Fork https://github.com/kdriedger/vibe-store
+2. Add a JSON file to `apps/` (e.g., `apps/myapp.json`)
+3. Submit a PR
+
+### App JSON Format
+
+Each app is a JSON file in `apps/`:
+
+```json
+{
+  "id": "my-app-id",
+  "name": "My App",
+  "description": "A brief description",
+  "version": "1.0.0",
+  "author": "Developer Name",
+  "downloadUrl": "https://example.com/myapp.apk",
+  "iconUrl": "https://example.com/icon.png",
+  "tags": ["productivity", "tools"],
+  "price": 0,
+  "websiteUrl": "https://myapp.com",
+  "sourceUrl": "https://github.com/dev/myapp",
+  "changelog": "Initial release",
+  "status": "active"
+}
+```
+
+### Required Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| id | string | Unique slug (lowercase, hyphens, e.g. "my-app") |
+| name | string | Display name (max 100 chars) |
+| description | string | Short description (max 500 chars) |
+| version | string | Semantic version (e.g. "1.0.0") |
+| author | string | Developer name |
+| downloadUrl | string | Direct APK download link |
+| iconUrl | string | App icon URL (PNG, 512x512 recommended) |
+
+### Optional Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| tags | string[] | Category tags (max 10) |
+| price | number | Price in USD (0 = free) |
+| websiteUrl | string | App landing page |
+| sourceUrl | string | Source code repository |
+| changelog | string | Release notes |
+| status | string | "active", "draft", or "deprecated" (default: "active") |
+
+## Submission Workflow
+
+```
+Developer/AI Agent
+    ↓ Creates Issue with "app-submission" label
+GitHub Action (issue-to-pr.yml)
+    ↓ Parses issue body, validates, creates apps/{id}.json
+Auto Pull Request
+    ↓ Maintainer reviews
+Merge → apps.json regenerated → Live in the store
+```
+
+## Project Links
+
+- **Source code**: https://github.com/kdriedger/vibe-store
+- **Submit an app**: https://github.com/kdriedger/vibe-store/issues/new?template=app-submission.md
+- **Browse apps**: https://raw.githubusercontent.com/kdriedger/vibe-store/main/apps/apps.json
+
+## For AI Agents
+
+When interacting with VibeStore:
+- Read the app catalog from the raw GitHub JSON URL above
+- Submit new apps by creating a GitHub Issue (see curl example)
+- No API key needed — submissions are public and reviewed by a maintainer
+- All data is transparent in the GitHub repository

@@ -31,7 +31,8 @@ exclude:
 
 # INCLUDES
 include:
-  - web # (for flutter2048)
+  - web # (for existing flutter app)
+  - vibestore # (vibe-store app catalog)
 
 # CUSTOM VARIABLES
 

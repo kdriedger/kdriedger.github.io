@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="/vibestore/">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="VibeStore — Your personal Android app store for vibe-coded apps. Hand-crafted. No corporate nonsense. Publish and discover independently developed Android apps.">
+  <meta name="keywords" content="android, app store, vibe-coded, indie apps, apk, open source">
+  <meta name="author" content="VibeStore">
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="VibeStore — Personal Android App Store">
+  <meta property="og:description" content="Your personal Android app store for vibe-coded apps. Hand-crafted. No corporate nonsense.">
+  <meta property="og:url" content="https://vibestore.app">
+  <meta property="og:image" content="icons/Icon-512.png">
+  <meta property="og:site_name" content="VibeStore">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="VibeStore — Personal Android App Store">
+  <meta name="twitter:description" content="Your personal Android app store for vibe-coded apps.">
+  <meta name="twitter:image" content="icons/Icon-512.png">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="VibeStore">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>VibeStore — Personal Android App Store</title>
+  <link rel="manifest" href="manifest.json">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "VibeStore",
+    "description": "Your personal Android app store for vibe-coded apps. Hand-crafted. No corporate nonsense.",
+    "url": "https://vibestore.app",
+    "applicationCategory": "ApplicationStore",
+    "operatingSystem": "Android",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "VibeStore",
+    "url": "https://vibestore.app",
+    "description": "A curated marketplace for independently developed Android applications.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://script.google.com/macros/s/SCRIPT_ID/exec?action=list",
+      "query-input": "required name=search_term"
+    }
+  }
+  </script>
+</head>
+<body>
+  <!--
+    You can customize the "flutter_bootstrap.js" script.
+    This is useful to provide a custom configuration to the Flutter loader
+    or to give the user feedback during the initialization process.
+
+    For more details:
+    * https://docs.flutter.dev/platform-integration/web/initialization
+  -->
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
