@@ -16,12 +16,12 @@ VibeStore is a curated app marketplace for independently developed ("vibe-coded"
 
 ## App Catalog
 
-App data is served as a JSON array from:
+App data is served as a JSON array from the public **vibe-apps** repo:
 ```
-https://raw.githubusercontent.com/kdriedger/vibe-store/main/apps/apps.json
+https://raw.githubusercontent.com/kdriedger/vibe-apps/main/apps.json
 ```
 
-Individual app files live in `apps/*.json`.
+This is a separate public repo (`kdriedger/vibe-apps`) so the catalog is accessible even though the VibeStore source repo is private.
 
 ## How to Submit an App
 
@@ -99,24 +99,28 @@ Each app is a JSON file in `apps/`:
 
 ```
 Developer/AI Agent
-    ↓ Creates Issue with "app-submission" label
+    ↓ Creates Issue with "app-submission" label on kdriedger/vibe-store
 GitHub Action (issue-to-pr.yml)
     ↓ Parses issue body, validates, creates apps/{id}.json
-Auto Pull Request
-    ↓ Maintainer reviews
-Merge → apps.json regenerated → Live in the store
+Auto Pull Request (on kdriedger/vibe-store)
+    ↓ Maintainer reviews & merges
+sync-catalog.yml → pushes apps.json to kdriedger/vibe-apps
+    ↓
+Live in the store (Flutter reads from vibe-apps raw URL)
 ```
 
 ## Project Links
 
-- **Source code**: https://github.com/kdriedger/vibe-store
+- **Source code (private)**: https://github.com/kdriedger/vibe-store
+- **App catalog (public)**: https://github.com/kdriedger/vibe-apps
+- **Live store**: https://www.extremedesigners.ca/vibestore
 - **Submit an app**: https://github.com/kdriedger/vibe-store/issues/new?template=app-submission.md
-- **Browse apps**: https://raw.githubusercontent.com/kdriedger/vibe-store/main/apps/apps.json
+- **Browse catalog JSON**: https://raw.githubusercontent.com/kdriedger/vibe-apps/main/apps.json
 
 ## For AI Agents
 
 When interacting with VibeStore:
-- Read the app catalog from the raw GitHub JSON URL above
-- Submit new apps by creating a GitHub Issue (see curl example)
-- No API key needed — submissions are public and reviewed by a maintainer
-- All data is transparent in the GitHub repository
+- **Read the catalog**: fetch from `https://raw.githubusercontent.com/kdriedger/vibe-apps/main/apps.json` (public, no auth needed)
+- **Submit apps**: create a GitHub Issue on `kdriedger/vibe-store` with the `app-submission` label (see curl example above)
+- **No API key needed** — submissions are reviewed by a maintainer
+- **Repo structure**: `kdriedger/vibe-store` (private, source + workflows) + `kdriedger/vibe-apps` (public, catalog only) + `kdriedger/kdriedger.github.io` (public, hosted site)
