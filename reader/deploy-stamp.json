@@ -1,10 +1,10 @@
 {
   "app": "grok_reader",
-  "version": "1.7.5+128",
+  "version": "1.7.5+129",
   "version_name": "1.7.5",
-  "build_number": "128",
+  "build_number": "129",
   "base_href": "/reader/",
-  "deployed_at_utc": "2026-07-18T01:30:39Z",
-  "main_dart_js_sha256": "b01a527b8292ad60f4bc99376a366331375cd82df7b7e4469eac13db966477d3",
-  "main_dart_js_bytes": 3540571
+  "deployed_at_utc": "2026-07-18T02:11:32Z",
+  "main_dart_js_sha256": "dbf3fbc94328968300f24432dfaa0d11c98112a317531f985c40cb63b5825d4e",
+  "main_dart_js_bytes": 3537903
 }
