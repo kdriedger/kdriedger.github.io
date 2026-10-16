@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="/bible/">
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="Bible Keep - Note taking app with Bible verse insertion">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Bible Keep</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="google-signin-client_id" content="530927044594-u6e6tbif16bgfa66imt377bqtbd2elso.apps.googleusercontent.com">
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <style>
+    body { margin: 0; }
+    #loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div id="loading">Loading Bible Keep...</div>
+  <script>
+    // Remove loading indicator when Flutter app loads
+    window.addEventListener('flutter-first-frame', function() {
+      var loading = document.getElementById('loading');
+      if (loading) loading.remove();
+    });
+  </script>
+  <script src="main.dart.js" type="application/javascript"></script>
+</body>
+</html>

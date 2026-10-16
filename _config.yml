@@ -34,6 +34,7 @@ include:
   - web # (for existing flutter app)
   - vibestore # (vibe-store app catalog)
   - reader # (grok reader flutter web)
+  - bible # (bible keep flutter web)
 
 # CUSTOM VARIABLES
 
