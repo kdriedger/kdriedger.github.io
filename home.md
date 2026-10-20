@@ -12,3 +12,5 @@ Contact me for more information about joining: [linuxbox+driedgerhomeschool@gmai
 
 [Web 2048 Game](/flutter48)
 
+[Architecture apps](/architecture)
+
