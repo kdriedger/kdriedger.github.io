@@ -1,0 +1,49 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Expo — Extreme Designers</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden;background:#0d0f14;color:#eef;font:15px/1.4 system-ui,-apple-system,sans-serif}
+#vp{position:fixed;inset:0;touch-action:none;cursor:grab;background:radial-gradient(circle,#2a2f3d 1px,transparent 1px) 0 0/32px 32px}
+#vp.drag{cursor:grabbing}
+#plane{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform}
+#plane.anim{transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.card{position:absolute;width:300px;height:190px;padding:22px;border-radius:18px;background:linear-gradient(150deg,var(--c),#1a1d26 70%);border:1px solid #ffffff22;box-shadow:0 10px 40px #0008;user-select:none}
+.card h2{margin:0 0 8px;font-size:24px}.card p{margin:0;color:#cfd3e0}.card .tag{position:absolute;bottom:18px;left:22px;font-size:12px;opacity:.7;letter-spacing:.08em;text-transform:uppercase}
+.card.on{outline:3px solid #fff}
+header{position:fixed;top:0;left:0;right:0;padding:calc(12px + env(safe-area-inset-top)) 16px 12px;display:flex;justify-content:space-between;align-items:center;pointer-events:none;background:linear-gradient(#0d0f14,transparent)}
+header b{font-size:17px}header small{opacity:.6;display:block}
+button{pointer-events:auto;font:inherit;color:#fff;background:#ffffff18;border:1px solid #ffffff33;border-radius:999px;padding:8px 14px;backdrop-filter:blur(8px)}
+#ctl{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));display:flex;gap:8px}
+</style></head><body>
+<div id="vp"><div id="plane"></div></div>
+<header><div><b>Expo Mode</b><small>Drag, scroll or pinch · tap a card</small></div></header>
+<div id="ctl"><button id="zo" aria-label="Zoom out">−</button><button id="zi" aria-label="Zoom in">+</button><button id="reset">Overview</button></div>
+<script>
+const P=[
+ ["SheetApp","Flutter app for Android and web.","Android · Web","#2f6df6",0,0],
+ ["BP Recorder","Records blood pressure readings from a monitor photo.","Android","#e0455a",380,-60],
+ ["VibeStore","Catalog of Kevin's apps with APK downloads.","Web","#8b5cf6",760,20],
+ ["Ontario Lease","Tenant fills online, gets the official Form 2229e PDF.","extremedesigners.ca","#14a37f",140,260],
+ ["Draftwise","Designs a house addition blind from the brief, scored against the real permit.","Project","#f59e0b",560,300]];
+const vp=document.getElementById('vp'),pl=document.getElementById('plane');
+let s=1,x=0,y=0;const apply=()=>pl.style.transform=`translate(${x}px,${y}px) scale(${s})`;
+const clamp=v=>Math.min(4,Math.max(.2,v));
+const PORT=innerWidth<600,PP=[[0,0],[340,120],[40,260],[380,380],[60,520]];let BW=1060,BH=550,BY=-60;if(PORT){BW=680;BH=710;BY=0}
+P.forEach(([t,d,g,c,cx,cy],i)=>{if(PORT)[cx,cy]=PP[i];const e=document.createElement('div');e.className='card';e.dataset.i=i;e.style.cssText=`left:${cx}px;top:${cy}px;--c:${c}`;e.innerHTML=`<h2>${t}</h2><p>${d}</p><span class="tag">${g}</span>`;pl.appendChild(e)});
+function fit(x0,y0,w,h,pad,anim=true){const W=innerWidth,H=innerHeight-60;s=clamp(Math.min((W-pad*2)/w,(H-pad*2)/h));x=(W-w*s)/2-x0*s;y=60+(H-h*s)/2-y0*s;pl.classList.toggle('anim',anim);apply()}
+function overview(a=true){document.querySelectorAll('.card.on').forEach(c=>c.classList.remove('on'));fit(0,BY,BW,BH,16,a)}
+function zoomAt(f,px,py){const n=clamp(s*f);x=px-(px-x)*n/s;y=py-(py-y)*n/s;s=n;apply()}
+const pts=new Map();let moved=0,last=null,pinch=null;
+vp.addEventListener('pointerdown',e=>{vp.setPointerCapture(e.pointerId);pts.set(e.pointerId,{x:e.clientX,y:e.clientY});pl.classList.remove('anim');moved=0;vp.classList.add('drag');if(pts.size==2){const[a,b]=[...pts.values()];pinch={d:Math.hypot(a.x-b.x,a.y-b.y)}}});
+vp.addEventListener('pointermove',e=>{if(!pts.has(e.pointerId))return;const p=pts.get(e.pointerId),dx=e.clientX-p.x,dy=e.clientY-p.y;p.x=e.clientX;p.y=e.clientY;moved+=Math.abs(dx)+Math.abs(dy);
+ if(pts.size==1){x+=dx;y+=dy;apply()}else if(pts.size==2){const[a,b]=[...pts.values()],d=Math.hypot(a.x-b.x,a.y-b.y);x+=dx/2;y+=dy/2;zoomAt(d/pinch.d,(a.x+b.x)/2,(a.y+b.y)/2);pinch.d=d}});
+const up=e=>{const tap=pts.size==1&&moved<8;pts.delete(e.pointerId);if(pts.size<2)pinch=null;if(!pts.size)vp.classList.remove('drag');
+ if(tap){const c=document.elementFromPoint(e.clientX,e.clientY)?.closest('.card');if(c){document.querySelectorAll('.card.on').forEach(k=>k.classList.remove('on'));c.classList.add('on');fit(c.offsetLeft,c.offsetTop,300,190,20)}}};
+vp.addEventListener('pointerup',up);vp.addEventListener('pointercancel',up);
+vp.addEventListener('wheel',e=>{e.preventDefault();pl.classList.remove('anim');zoomAt(Math.exp(-e.deltaY*(e.ctrlKey?.01:.002)),e.clientX,e.clientY)},{passive:false});
+const ctr=f=>{pl.classList.add('anim');zoomAt(f,innerWidth/2,innerHeight/2)};
+zi.onclick=()=>ctr(1.4);zo.onclick=()=>ctr(1/1.4);reset.onclick=()=>overview();
+addEventListener('keydown',e=>{if(e.key=='0'||e.key=='Escape')overview()});
+addEventListener('resize',()=>overview(false));overview(false);
+window.__state=()=>({s,x,y});
+</script></body></html>
