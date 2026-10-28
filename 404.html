@@ -2,6 +2,15 @@
 layout: 404
 title: "404"
 ---
+<script>
+	// SPA redirect: unknown VibeStore deep links -> let the Flutter app show its own not-found page.
+	(function () {
+		var l = window.location;
+		if (l.pathname.indexOf('/vibestore/apps/') === 0) {
+			l.replace('/vibestore/?p=' + encodeURIComponent(l.pathname.slice('/vibestore'.length) + l.search) + l.hash);
+		}
+	})();
+</script>
 <div id="home-button" class="container text-center">
 		<h1 class="typewriter display-1 m-0 text-center" style="font-size: 5rem;">
 			<a id="404" href="/home/"></a>

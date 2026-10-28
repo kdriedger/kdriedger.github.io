@@ -91,6 +91,16 @@
     For more details:
     * https://docs.flutter.dev/platform-integration/web/initialization
   -->
+  <script>
+    // Restore a deep link redirected here by the site's root 404.html (?p=/apps/<id>).
+    (function () {
+      var l = window.location;
+      var p = new URLSearchParams(l.search).get('p');
+      if (p && p.charAt(0) === '/') {
+        window.history.replaceState(null, '', l.pathname.replace(/\/$/, '') + p + l.hash);
+      }
+    })();
+  </script>
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>
