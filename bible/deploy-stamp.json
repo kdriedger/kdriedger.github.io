@@ -1,10 +1,1 @@
-{
-  "app": "bible_keep",
-  "version": "0.5.17",
-  "version_name": "0.5.17",
-  "build_number": "2018",
-  "base_href": "/bible/",
-  "deployed_at_utc": "2026-10-16T16:01:19Z",
-  "main_dart_js_sha256": "9a0429813e409334ea3cbca608c7566d7ebe960e9425bf2bf512689f8da7cba5",
-  "main_dart_js_bytes": 3298342
-}
+{"app":"bible_keep","version":"0.5.19","build_number":"2020","base_href":"/bible/","deployed_at_utc":"2026-11-01T16:11:56Z","main_dart_js_sha256":"1164010f4368f842f708b80252a5ae82fd746932b5385009425b04dd68d123c0","main_dart_js_bytes":3302854}
